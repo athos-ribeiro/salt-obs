@@ -24,6 +24,10 @@ enable_apache_expires_module:
   cmd.run:
     - name: a2enmod expires
 
+disable_default_apache2_site:
+  cmd.run:
+    - name: a2dissite 000-default.conf
+
 enable_obs_site:
   cmd.run:
     - name: a2ensite obs
