@@ -56,7 +56,7 @@ setup_database:
     - name: "RAILS_ENV=production bundle exec rake db:setup"
     - cwd: /usr/share/obs/api
 
-setup_database:
+compile_assets:
   cmd.run:
     - name: "RAILS_ENV=production bundle exec rake assets:precompile"
     - cwd: /usr/share/obs/api

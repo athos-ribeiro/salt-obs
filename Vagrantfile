@@ -67,4 +67,18 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  #
+  #
+  #
+  config.vm.synced_folder "salt/", "/srv/salt/", type: 'rsync'
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.vm.provision :salt do |salt|
+    salt.masterless = true
+    salt.minion_config = "minion"
+    salt.run_highstate = true
+    salt.colorize = true
+    salt.verbose = true
+    salt.log_level = 'info'
+  end
+
 end
