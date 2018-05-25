@@ -12,6 +12,18 @@ enable_obs_workers:
     - repl: 'ENABLED=1'
     - count: 1
 
+patch1_obs_api_gemfile_lock:
+  cmd.run:
+    - name: sed -i 's/sass (3.4.22)/sass (3.4.23)/' /usr/share/obs/api/Gemfile.lock
+
+patch2_obs_api_gemfile:
+  cmd.run:
+    - name: sed -i 's/^group :assets do$//' /usr/share/obs/api/Gemfile
+
+patch3_obs_api_gemfile:
+  cmd.run:
+    - name: sed -i '93s/^end$//' /usr/share/obs/api/Gemfile
+
 enable_apache_ssl_module:
   cmd.run:
     - name: a2enmod ssl
