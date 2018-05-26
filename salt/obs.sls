@@ -61,18 +61,28 @@ enable_obs_site:
       - user
       - group
 
-reload_apache:
-  service.running:
-    - name: apache2
-    - enable: True
-    - reload: True
-
+{% if salt['grains.get']('db_setup') != 'done' %}
 setup_database:
   cmd.run:
     - name: "RAILS_ENV=production bundle exec rake db:setup"
     - cwd: /usr/share/obs/api
+  grains.present:
+    - name: db_setup
+    - value: done
+{% endif %}
 
 compile_assets:
   cmd.run:
     - name: "RAILS_ENV=production bundle exec rake assets:precompile"
     - cwd: /usr/share/obs/api
+
+restart_apache:
+  service.running:
+    - name: apache2
+    - enable: True
+    - watch_any:
+      - enable_obs_site
+      - disable_default_apache2_site
+      - file: /var/log/obs
+      - file: /usr/share/obs/api
+      - compile_assets
