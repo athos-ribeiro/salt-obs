@@ -1,3 +1,16 @@
+/etc/apt/sources.list:
+  file.managed:
+    - source: salt://files/sources.list
+    - user: root
+    - group: root
+    - mode: 644
+
+refresh_packages_db:
+  cmd.run:
+    - name: apt-get update -y
+    - onchanges:
+      - file: /etc/apt/sources.list
+
 install_obs_packages:
   pkg.installed:
     - pkgs:
