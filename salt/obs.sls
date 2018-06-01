@@ -33,7 +33,6 @@ setup_obs_api:
   grains.present:
     - name: api_setup
     - value: done
-{% endif %}
 
 restart_apache:
   service.running:
@@ -41,3 +40,4 @@ restart_apache:
     - enable: True
     - watch:
       - setup_obs_api
+{% endif %}
