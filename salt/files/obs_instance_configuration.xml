@@ -1,0 +1,31 @@
+<configuration>
+  <title>Debian LLVM OBS builder</title>
+  <description>  &lt;p class="description"&gt;
+		The Debian LLVM OBS builder is used to both distribute upstream LLVM .deb packages
+and perform experimental builds of the Debian archive against Clang.
+  &lt;/p&gt;
+  &lt;p class="description"&gt;
+For questions and suggestions, please contact Sylvestre at sylvestre@debian.org
+  &lt;/p&gt;
+</description>
+  <name>private</name>
+  <download_on_demand>on</download_on_demand>
+  <enforce_project_keys>off</enforce_project_keys>
+  <anonymous>on</anonymous>
+  <registration>deny</registration>
+  <default_access_disabled>off</default_access_disabled>
+  <allow_user_to_create_home_project>on</allow_user_to_create_home_project>
+  <disallow_group_creation>off</disallow_group_creation>
+  <change_password>on</change_password>
+  <hide_private_options>off</hide_private_options>
+  <gravatar>on</gravatar>
+  <cleanup_empty_projects>on</cleanup_empty_projects>
+  <disable_publish_for_branches>on</disable_publish_for_branches>
+  <admin_email>unconfigured@openbuildservice.org</admin_email>
+  <schedulers>
+    <arch>armv7l</arch>
+    <arch>armv7hl</arch>
+    <arch>i586</arch>
+    <arch>x86_64</arch>
+  </schedulers>
+</configuration>

@@ -1,0 +1,9 @@
+<project name="Debian:8">
+<title>Debian 8 DoD</title>
+<description>Debian 8 DoD</description>
+<person userid="Admin" role="maintainer"/>
+<repository name="main">
+<download arch="x86_64" url="http://deb.debian.org/debian/jessie/main" repotype="deb"/>
+<arch>x86_64</arch>
+</repository>
+</project>

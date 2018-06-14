@@ -1,0 +1,9 @@
+<project name="debclang">
+<title>Debian Clang Rebuilds</title>
+<description>test</description>
+<person userid="Admin" role="maintainer"/>
+<repository name="Debian_Unstable_Clang">
+<path project="Debian:Unstable" repository="main"/>
+<arch>x86_64</arch>
+</repository>
+</project>

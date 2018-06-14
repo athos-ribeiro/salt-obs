@@ -1,0 +1,9 @@
+<project name="test">
+<title>test</title>
+<description>test</description>
+<person userid="Admin" role="maintainer"/>
+<repository name="Debian_8.0">
+<path project="Debian:8" repository="main"/>
+<arch>x86_64</arch>
+</repository>
+</project>

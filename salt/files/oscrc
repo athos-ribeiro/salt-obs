@@ -1,0 +1,10 @@
+[general]
+apiurl = https://localhost:443
+
+[https://localhost:443]
+user = Admin
+pass = opensuse
+# email used in .changes, unless the one from osc meta prj <user> will be used
+# email =
+# Force using of keyring for this API
+#keyring = 1
