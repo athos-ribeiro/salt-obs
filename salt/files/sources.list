@@ -1,2 +1,5 @@
 deb http://httpredir.debian.org/debian stretch main
-deb-src http://httpredir.debian.org/debian unstable main
+deb-src http://httpredir.debian.org/debian sid main
+deb-src http://httpredir.debian.org/debian buster main
+deb-src http://httpredir.debian.org/debian jessie main
+deb-src http://httpredir.debian.org/debian stretch main

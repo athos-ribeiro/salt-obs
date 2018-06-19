@@ -1,0 +1,9 @@
+<project name="Debian:Testing:test">
+<title>Debian Testing builds</title>
+<description>Project to test Debian Testing builds</description>
+<person userid="Admin" role="maintainer"/>
+<repository name="Debian_Testing">
+<path project="Debian:Testing" repository="main"/>
+<arch>x86_64</arch>
+</repository>
+</project>

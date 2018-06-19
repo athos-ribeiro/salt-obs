@@ -5,6 +5,13 @@
     - group: root
     - mode: 644
 
+/etc/hosts:
+  file.managed:
+    - source: salt://files/etc-hosts
+    - user: root
+    - group: root
+    - mode: 644
+
 refresh_packages_db:
   cmd.run:
     - name: apt-get update -y
@@ -71,6 +78,34 @@ restart_apache:
     - group: root
     - mode: 644
 
+/tmp/debian_9.xml:
+  file.managed:
+    - source: salt://files/debian_9.xml
+    - user: root
+    - group: root
+    - mode: 644
+
+/tmp/debian_9.conf:
+  file.managed:
+    - source: salt://files/debian_9.conf
+    - user: root
+    - group: root
+    - mode: 644
+
+/tmp/debian_testing.xml:
+  file.managed:
+    - source: salt://files/debian_testing.xml
+    - user: root
+    - group: root
+    - mode: 644
+
+/tmp/debian_testing.conf:
+  file.managed:
+    - source: salt://files/debian_testing.conf
+    - user: root
+    - group: root
+    - mode: 644
+
 /tmp/debian_unstable.xml:
   file.managed:
     - source: salt://files/debian_unstable.xml
@@ -92,9 +127,23 @@ restart_apache:
     - group: root
     - mode: 644
 
-/tmp/test_proj.xml:
+/tmp/debian_8_test.xml:
   file.managed:
-    - source: salt://files/test_proj.xml
+    - source: salt://files/debian_8_test.xml
+    - user: root
+    - group: root
+    - mode: 644
+
+/tmp/debian_9_test.xml:
+  file.managed:
+    - source: salt://files/debian_9_test.xml
+    - user: root
+    - group: root
+    - mode: 644
+
+/tmp/debian_testing_test.xml:
+  file.managed:
+    - source: salt://files/debian_testing_test.xml
     - user: root
     - group: root
     - mode: 644
@@ -111,6 +160,22 @@ configure_debian_8_project:
   cmd.run:
     - name: osc -A https://localhost:443 meta prjconf Debian:8 -F /tmp/debian_8.conf
 
+create_debian_9_project:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta prj Debian:9 -F /tmp/debian_9.xml
+
+configure_debian_9_project:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta prjconf Debian:9 -F /tmp/debian_9.conf
+
+create_debian_testing_project:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta prj Debian:Testing -F /tmp/debian_testing.xml
+
+configure_debian_testing_project:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta prjconf Debian:Testing -F /tmp/debian_testing.conf
+
 create_debian_unstable_project:
   cmd.run:
     - name: osc -A https://localhost:443 meta prj Debian:Unstable -F /tmp/debian_unstable.xml
@@ -121,9 +186,17 @@ configure_debian_unstable_project:
 
 create_debian_clang_project:
   cmd.run:
-    - name: osc -A https://localhost:443 meta prj debclang -F /tmp/debian_clang.xml
+    - name: osc -A https://localhost:443 meta prj Debian:Unstable:Clang -F /tmp/debian_clang.xml
 
-create_test_project:
+create_debian_8_test_project:
   cmd.run:
-    - name: osc -A https://localhost:443 meta prj test -F /tmp/test_proj.xml
+    - name: osc -A https://localhost:443 meta prj Debian:8:test -F /tmp/debian_8_test.xml
+
+create_debian_9_test_project:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta prj Debian:9:test -F /tmp/debian_9_test.xml
+
+create_debian_testing_test_project:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta prj Debian:Testing:test -F /tmp/debian_testing_test.xml
 

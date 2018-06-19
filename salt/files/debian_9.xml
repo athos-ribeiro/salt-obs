@@ -1,0 +1,9 @@
+<project name="Debian:9">
+<title>Debian 9 DoD</title>
+<description>Debian 9 DoD</description>
+<person userid="Admin" role="maintainer"/>
+<repository name="main">
+<download arch="x86_64" url="http://deb.debian.org/debian/stretch/main" repotype="deb"/>
+<arch>x86_64</arch>
+</repository>
+</project>

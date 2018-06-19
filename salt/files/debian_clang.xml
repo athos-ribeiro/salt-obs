@@ -1,6 +1,6 @@
-<project name="debclang">
+<project name="Debian:Unstable:Clang">
 <title>Debian Clang Rebuilds</title>
-<description>test</description>
+<description>Rebuild Debian Archive against Clang compiler</description>
 <person userid="Admin" role="maintainer"/>
 <repository name="Debian_Unstable_Clang">
 <path project="Debian:Unstable" repository="main"/>

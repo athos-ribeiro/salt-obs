@@ -2,15 +2,6 @@
   <title>Debian Unstable</title>
   <description>Debian Unstable Download on Demand release.</description>
   <person userid="Admin" role="maintainer"/>
-  <build>
-    <disable/>
-  </build>
-  <publish>
-    <disable/>
-  </publish>
-  <debuginfo>
-    <disable/>
-  </debuginfo>
 	<repository name="main">
 	<download arch="x86_64" url="http://deb.debian.org/debian/sid/main" repotype="deb"/>
 	<arch>x86_64</arch>

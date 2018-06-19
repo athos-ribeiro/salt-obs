@@ -1,6 +1,6 @@
-<project name="test">
-<title>test</title>
-<description>test</description>
+<project name="Debian:8:test">
+<title>Debian 8 builds</title>
+<description>Project to test Debian 8 builds</description>
 <person userid="Admin" role="maintainer"/>
 <repository name="Debian_8.0">
 <path project="Debian:8" repository="main"/>
