@@ -33,6 +33,13 @@ install_obs_packages:
     - group: root
     - mode: 644
 
+/usr/lib/obs-build/Build/Deb.pm:
+  file.managed:
+    - source: salt://files/Deb.pm
+    - user: root
+    - group: root
+    - mode: 644
+
 {% if salt['grains.get']('api_setup') != 'done' %}
 setup_obs_api:
   cmd.run:
