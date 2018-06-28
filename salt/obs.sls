@@ -25,6 +25,7 @@ install_obs_packages:
       - obs-api
       - obs-worker
       - osc
+    - fromrepo: stretch-backports
 
 /etc/default/obsworker:
   file.managed:
