@@ -18,6 +18,11 @@ refresh_packages_db:
     - onchanges:
       - file: /etc/apt/sources.list
 
+install_apache:
+  pkg.installed:
+    - pkgs:
+      - apache2
+
 install_obs_packages:
   pkg.installed:
     - pkgs:
