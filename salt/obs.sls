@@ -30,18 +30,23 @@ install_obs_packages:
       - obs-api
       - obs-worker
       - osc
+
+install_obs_build_from_backports:
+  pkg.latest:
+    - pkgs:
+      - obs-build
     - fromrepo: stretch-backports
 
-/etc/default/obsworker:
+/usr/share/obs/api/Gemfile:
   file.managed:
-    - source: salt://files/obsworker
+    - source: salt://files/Gemfile
     - user: root
     - group: root
     - mode: 644
 
-/usr/lib/obs-build/Build/Deb.pm:
+/etc/default/obsworker:
   file.managed:
-    - source: salt://files/Deb.pm
+    - source: salt://files/obsworker
     - user: root
     - group: root
     - mode: 644
