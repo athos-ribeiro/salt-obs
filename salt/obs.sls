@@ -37,6 +37,14 @@ install_obs_build_from_backports:
       - obs-build
     - fromrepo: stretch-backports
 
+install_libsolv_from_testing:
+  pkg.latest:
+    - pkgs:
+      - libsolv0
+      - libsolv-perl
+      - libsolvext0
+    - fromrepo: buster
+
 /usr/share/obs/api/Gemfile:
   file.managed:
     - source: salt://files/Gemfile
