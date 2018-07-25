@@ -76,6 +76,11 @@ restart_apache:
       - setup_obs_api
 {% endif %}
 
+start_obsservice:
+  service.running:
+    - name: obsservice
+    - enable: True
+
 /root/.oscrc:
   file.managed:
     - source: salt://files/oscrc
@@ -173,6 +178,22 @@ restart_apache:
     - user: root
     - group: root
     - mode: 644
+
+/usr/lib/obs/service/clang_build.service:
+  file.managed:
+    - source: salt://files/clang_build.service
+    - user: root
+    - group: root
+    - mode: 644
+    - makedirs: True
+
+/usr/lib/obs/service/clang_build:
+  file.managed:
+    - source: salt://files/clang_build
+    - user: root
+    - group: root
+    - mode: 755
+    - makedirs: True
 
 set_obs_instance_configurations:
   cmd.run:

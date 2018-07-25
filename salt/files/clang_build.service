@@ -1,0 +1,6 @@
+<service name="clang_build">
+  <summary>Build packages against Clang</summary>
+  <description>
+  This service substitutes CC and CXX for clang before builds
+</description>
+</service>
