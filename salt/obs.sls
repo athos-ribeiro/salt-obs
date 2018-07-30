@@ -247,3 +247,13 @@ create_debian_testing_test_project:
   cmd.run:
     - name: osc -A https://localhost:443 meta prj Debian:Testing:test -F /tmp/debian_testing_test.xml
 
+/usr/local/bin/trigger_clang_build:
+  file.managed:
+    - source: salt://files/trigger_clang_build
+    - user: root
+    - group: root
+    - mode: 755
+
+build_obs_clang_build_package:
+  cmd.run:
+    - name: trigger_clang_build obs-service-clang-build

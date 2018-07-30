@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e
+PKG=$1
+
+rm -rf /root/Debian\:Unstable\:Clang
+cd /root
+osc co Debian:Unstable:Clang > /dev/null 2>&1
+cd Debian\:Unstable\:Clang/
+
+if [ "$PKG" == "obs-service-clang-build" ]; then
+  if ! osc ls Debian:Unstable:Clang obs-service-clang-build > /dev/null 2>&1; then
+    echo 'Preparing obs-service-clang-build package...'
+    mkdir obs-service-clang-build
+    cd obs-service-clang-build/
+    wget 'https://www.ime.usp.br/~athoscr/files/obs/obs-service-clang-build_0.1-1.debian.tar.xz'
+    wget 'https://www.ime.usp.br/~athoscr/files/obs/obs-service-clang-build_0.1-1.dsc'
+    wget 'https://www.ime.usp.br/~athoscr/files/obs/obs-service-clang-build_0.1.orig.tar.gz'
+    cd /root/Debian\:Unstable\:Clang
+    osc add obs-service-clang-build > /dev/null 2>&1
+    osc ci -m 'First clang-build package' > /dev/null 2>&1
+    echo 'obs-service-clang-build package build triggered. Wait until it is complete to trigger clang builds.'
+  else
+    echo 'obs-service-clang-build already present'
+  fi
+  exit
+fi
+
+echo "Preparing $PKG..."
+PKG_EXISTS=false
+if osc ls Debian:Unstable:Clang $PKG > /dev/null 2>&1 ; then
+  PKG_EXISTS=true
+fi
+
+if ! $PKG_EXISTS; then
+  mkdir $PKG
+else
+  rm -rf $PKG/*
+fi
+cd $PKG/
+apt source -d $PKG/sid > /dev/null 2>&1
+cat > _service << EOF
+<services>
+  <service name="clang_build" mode="buildtime" />
+</services>
+EOF
+cd /root/Debian\:Unstable\:Clang
+if ! $PKG_EXISTS; then
+  osc add $PKG  > /dev/null 2>&1
+else
+  osc addremove $PKG > /dev/null 2>&1
+fi
+osc ci -m "New $PKG package clang build" > /dev/null 2>&1 
