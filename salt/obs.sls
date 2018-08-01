@@ -254,6 +254,11 @@ create_debian_testing_test_project:
     - group: root
     - mode: 755
 
+{% if salt['grains.get']('obs_service_build') != 'done' %}
 build_obs_clang_build_package:
   cmd.run:
     - name: trigger_clang_build obs-service-clang-build
+  grains.present:
+    - name: obs_service_build
+    - value: done
+{% endif %}
