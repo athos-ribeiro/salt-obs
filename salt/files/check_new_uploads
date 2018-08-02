@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+import imaplib
+import email
+import subprocess
+from datetime import datetime, timedelta
+import time
+
+
+def parse_message(msg):
+    lines = msg.split('\n')
+    mapping = {
+        'Source': 'name',
+        'Version': 'version',
+        'Architecture': 'arch',
+        'Distribution': 'dist',
+        'Maintainer': 'maintainer'
+    }
+    pkg = {}
+    for line in lines:
+        if len(mapping) == 0:
+            break
+        for field, target in mapping.items():
+            if line.startswith('%s: ' % field):
+                val = line[len(field) + 2:]
+                pkg[target] = val.strip()
+                del mapping[field]
+                break
+    return pkg
+
+
+def trigger_build(pkg):
+    subprocess.run(['trigger_clang_build', pkg['name']])
+
+
+subprocess.run(['apt', 'update'])
+list_id = '<debian-devel-changes.lists.debian.org>'
+M = imaplib.IMAP4_SSL(IMAP_SERVER)
+M.login(USERNAME, PASSWORD)
+M.select()
+typ, data = M.search(None, 'UNSEEN')
+# typ, data = M.search(None, 'ALL')
+for num in data[0].split():
+    typ, data = M.fetch(num, '(RFC822)')
+    parsed_email = email.message_from_bytes(data[0][1])
+
+    # We want to give some time so the upload can propagate to the mirrors
+    email_time = email.utils.parsedate_tz(parsed_email['date'])
+    email_time_utc = email.utils.mktime_tz(email_time)
+    upload_time_limit = time.time() - 4*60*60
+    if email_time_utc > upload_time_limit:
+        # Too recent to be parsed
+        M.store(num, '-FLAGS', '\\SEEN')
+        continue
+
+    if parsed_email['subject'].startswith('Accepted') and parsed_email['list-id'] == list_id:
+        pkg = parse_message(parsed_email.get_payload())
+        if (pkg['dist'] in ['unstable', 'sid']) and 'amd64' in pkg['arch']:
+            trigger_build(pkg)
+    # M.store(num, '+FLAGS', '\\Deleted')
+# M.expunge()
+M.close()
+M.logout()
