@@ -266,4 +266,4 @@ build_obs_clang_build_package:
     - mode: 755
   cron.present:
     - user: root
-    - hour: '*/4'
+    - minute: 15
