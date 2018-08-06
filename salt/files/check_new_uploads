@@ -30,7 +30,7 @@ def parse_message(msg):
 
 
 def trigger_build(pkg):
-    subprocess.run(['trigger_clang_build', pkg['name']])
+    subprocess.run(['/usr/local/bin/trigger_clang_build', pkg['name']])
 
 
 subprocess.run(['apt', 'update'])
