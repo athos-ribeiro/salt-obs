@@ -267,3 +267,14 @@ build_obs_clang_build_package:
   cron.present:
     - user: root
     - minute: 15
+
+/tmp/obs_service_clang_build_meta.xml:
+  file.managed:
+    - source: salt://files/obs_service_clang_build_meta.xml
+    - user: root
+    - group: root
+    - mode: 644
+
+allow_obs_service_clang_build_usage:
+  cmd.run:
+    - name: osc -A https://localhost:443 meta pkg Debian:Unstable:Clang obs-service-clang-build -F /tmp/obs_service_clang_build_meta.xml

@@ -1,0 +1,7 @@
+<package name="obs-service-clang-build" project="Debian:Unstable:Clang">
+  <title/>
+  <description/>
+  <useforbuild>
+    <enable/>
+  </useforbuild>
+</package>
