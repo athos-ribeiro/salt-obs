@@ -55,7 +55,7 @@ for num in data[0].split():
 
     if parsed_email['subject'].startswith('Accepted') and parsed_email['list-id'] == list_id:
         pkg = parse_message(parsed_email.get_payload())
-        if (pkg['dist'] in ['unstable', 'sid']) and 'amd64' in pkg['arch']:
+        if (pkg['dist'] in ['unstable', 'sid']) and 'source' in pkg['arch']:
             trigger_build(pkg)
     # M.store(num, '+FLAGS', '\\Deleted')
 # M.expunge()
