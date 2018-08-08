@@ -3,10 +3,12 @@
 set -e
 PKG=$1
 
-rm -rf /root/Debian\:Unstable\:Clang
 cd /root
+if [ ! -d Debian\:Unstable\:Clang ]; then
 osc co Debian:Unstable:Clang > /dev/null 2>&1
+fi
 cd Debian\:Unstable\:Clang/
+osc up > /dev/null 2>&1
 
 if [ "$PKG" == "obs-service-clang-build" ]; then
   if ! osc ls Debian:Unstable:Clang obs-service-clang-build > /dev/null 2>&1; then
