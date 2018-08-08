@@ -179,22 +179,6 @@ start_obsservice:
     - group: root
     - mode: 644
 
-/usr/lib/obs/service/clang_build.service:
-  file.managed:
-    - source: salt://files/clang_build.service
-    - user: root
-    - group: root
-    - mode: 644
-    - makedirs: True
-
-/usr/lib/obs/service/clang_build:
-  file.managed:
-    - source: salt://files/clang_build
-    - user: root
-    - group: root
-    - mode: 755
-    - makedirs: True
-
 set_obs_instance_configurations:
   cmd.run:
     - name: osc -A https://localhost:443 api /configuration -T /tmp/obs_instance_configuration.xml
