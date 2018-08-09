@@ -47,7 +47,7 @@ for num in data[0].split():
     # We want to give some time so the upload can propagate to the mirrors
     email_time = email.utils.parsedate_tz(parsed_email['date'])
     email_time_utc = email.utils.mktime_tz(email_time)
-    upload_time_limit = time.time() - 4*60*60
+    upload_time_limit = time.time() - 6*60*60
     if email_time_utc > upload_time_limit:
         # Too recent to be parsed
         M.store(num, '-FLAGS', '\\SEEN')
