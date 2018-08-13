@@ -116,6 +116,17 @@ start_obsservice:
     - group: root
     - mode: 644
 
+trust_self_cert:
+  cmd.run:
+    - name: c_rehash /etc/ssl/certs/
+
+restart_obssrcserver:
+  service.running:
+    - name: obssrcserver
+    - enable: True
+    - watch:
+      - trust_self_cert
+
 set_obs_instance_configurations:
   cmd.run:
     - name: osc -A https://localhost:443 api /configuration -T /tmp/obs_instance_configuration.xml
